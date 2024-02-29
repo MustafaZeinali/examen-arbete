@@ -1,0 +1,59 @@
+
+.log-parent-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+.login-form-container {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    background-color: rgb(245, 242, 242);
+    border-radius: 12px;
+    box-shadow: 3px 3px 13px 1px rgba(0, 0, 0, 0.2);
+
+}
+.log-title{
+    text-align: center;
+    padding-top: 1em;
+}
+.login-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2em 2.9em;
+}
+.login-container > * {
+    display: flex;
+    flex-direction: column;
+}
+.login-container > div {
+    margin: .3em 0em;
+}
+.log-username , .log-password {
+    width: clamp(15em, 70%,15em);
+    height: 2.4em;
+    border: solid 1px blue;
+    border-radius: 34px;
+}
+.login-btn > button{
+    margin-top: 1em;
+    width: 6.8em;
+    padding: .9em;
+    border-radius: 34px;
+    border: none;
+    align-self: center;
+    background-color: #699e58;
+    color: aliceblue;
+}
+.skapa-konto {
+    color: rgb(120, 120, 240);
+    text-decoration: underline;
+}
+.log-close-icon {
+    display: flex;
+    justify-content: end;
+    font-size: 2em;
+}
