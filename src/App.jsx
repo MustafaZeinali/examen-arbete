@@ -1,3 +1,7 @@
+
+import './App.css'
+import MainPage from './components/MainPage'
+import Header from './components/header/Header'
 import { useEffect, useState } from "react";
 import Test from "./Test";
 
@@ -39,7 +43,7 @@ function App() {
         ))}
       </div>
     </>
-  );
+  )
 }
 
 export default App;
