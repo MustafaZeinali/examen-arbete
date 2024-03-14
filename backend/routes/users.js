@@ -43,22 +43,33 @@ router.post("/login", async (req, res) => {
     if (!userLogin) {
       console.log("User is not correct");
       res.status(400).send({ error: "it is wrong in user login" });
-      return
+      return;
     }
-    const UserPassValidate = await bcrypt.compare(
-      reqPass,
-      userLogin.password
-    );
+    const UserPassValidate = await bcrypt.compare(reqPass, userLogin.password);
     if (UserPassValidate) {
-        console.log("fron login",UserPassValidate);
+      console.log("fron login", UserPassValidate);
       res.json({ message: "Login successful" });
-      return
+      return;
     } else {
       console.log(UserPassValidate);
       return res.status(401).send({ error: "it is wrong password" });
     }
   } catch (err) {
     console.log(err, "Login failed");
+    res.status(500).json({ err: err.message });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const removeUser = await User.findByIdAndDelete(id);
+    if (removeUser) {
+      res.json({ message: "user is delete" , status: "succes", removeUser: removeUser});
+    } else {
+      res.status(401).json({ message: "user is not found" });
+    }
+  } catch (err) {
     res.status(500).json({ err: err.message });
   }
 });
