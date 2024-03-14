@@ -3,18 +3,41 @@ import cors from 'cors';
 import dotenv from "dotenv";
 // import { createLogger } from 'vite';
 import mongoose from 'mongoose';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-import { Product } from './models/post.js';
-import getProductRouter from "./routes/post.js"
-import postProductRouter from "./routes/post.js"
+
+import getProductRouter from "./routes/content.js"
+import getUserRouter from "./routes/users.js"
 
 const app = express();
 dotenv.config()
 const port = 1341
-app.use( express.json())
 
-app.use( "/api" , getProductRouter )
-app.use( "/api" , postProductRouter)
+
+// middleware
+app.use("/api" , express.json())
+app.use(cors());
+// app.use(express.urlencoded({ extended:false }));
+//logger
+app.use((req, res, next) => {
+	console.log(`${req.method}  ${req.url}`, req.body)
+	next()
+})
+
+const _dirname = dirname(fileURLToPath(import.meta.url));
+const dist = join(_dirname, "../dist");
+app.use(express.static(dist));
+
+app.options("*", (req, res) => {
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.send();
+});
+
+
+app.use( '/api/content' , getProductRouter );
+app.use("/api/user" , getUserRouter ); 
 
 
 mongoose.
