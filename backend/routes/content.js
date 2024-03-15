@@ -61,7 +61,7 @@ router.put("/edit/:id", async(req, res) => {
         if(!prevContent){
             return res.status(404).json({message: `cannot find product by id ${id}`})
         }
-        Object.assign(prevContent, updatecontentData)
+        // Object.assign(prevContent, updatecontentData)
         // if(updatecontentData){
         //     prevContent = updatecontentData.map(item => ({...item}))
         // }
@@ -76,14 +76,17 @@ router.put("/edit/:id", async(req, res) => {
 })
 
 router.delete("/delete/:id", async(req, res) => {
-
+    console.log("/delete/:id");
     try{
         const {id} = req.params
         const getProduct = await Content.findByIdAndDelete(id);
+
         if(!getProduct){
             res.status(404).json({message: `cannot delete product by id ${id}`})
+        }else{
+
+            res.json(getProduct)
         }
-        res.json(getProduct)
     }
     catch(error){
         res.status(500).json({ message: error.message})

@@ -9,20 +9,15 @@ function convertToLockalDate (timeZone){
 //new Date(new Date.getTime()-60*60*1000)
 const postSchema = mongoose.Schema(
     {
-        name:{
+        context:{
             type: String,
-            required:true,
-        },
-        quantity:{
-            type: Number,
-            required : false,
-            default:0
+            required:false,
         },
         price: {
             type: Number,
             required : false,
         },
-        Image: {
+        image: {
             type: String,
             required: false,
         },

@@ -1,4 +1,4 @@
-import SendData from "./api/postContent.js";
+import SendData from "./api/content/postContent.js";
 import { useState } from "react";
 
 const Test = () => {

@@ -18,8 +18,11 @@ router.get("/", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   const salting = await bcrypt.genSalt(10);
+  // validera input här
   const palintextPass = req.body.password;
+  console.log("register", palintextPass , salting);
   const hashpass = await bcrypt.hash(palintextPass, salting);
+  console.log("register 2 ");
   try {
     const newUser = new User({
       username: req.body.username,

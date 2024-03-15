@@ -2,14 +2,14 @@
 
 const SendData = async(content) => {
     const url = "/api/content"
-    const option = {
+    const options = {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(content)
     }
-    const response = await fetch(url, option)
+    const response = await fetch(url, options)
     const sendContent = response.json();
     if (sendContent){
         return true;
