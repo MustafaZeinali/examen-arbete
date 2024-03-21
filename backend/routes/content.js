@@ -52,7 +52,7 @@ router.post('/' , async(req, res ) => {
 })
 
 router.put("/edit/:id", async(req, res) => {
-
+    console.log("/edit/:id");
     try{
         const {id} = req.params
         // const {id} = req.params.id;

@@ -1,15 +1,20 @@
 import "../../style/mainPage.css";
-import { useEffect, useState , useRef, useContext} from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { ConfiContext } from "../../routeConfi/ContextConfi";
 import ClearItem from "../content/DeleteContent.jsx";
-
-
+import UpdateItem from "../content/UpdateContent";
+import getData from "../../api/content/getContent";
+import updateContent from "../../api/content/updateContent";
 const MainPage = () => {
-  const [postContent, setPostContent] = useState([]);
+  const {postContents, setPostContents} = useContext(ConfiContext);
   // const {postContent, setPostContent} = useContext(ConfiContext);
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(false);
-
+  const [isActived, setIsActived] = useState(false);
+  const[abc , setAbc] = useState("")
+  const [isUpdated, setIsUpdated] = useState("")
+  const [showTextArea , setShowTextArea] = useState(true)
+  const [hideText , setHideText] = useState(false)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +24,7 @@ const MainPage = () => {
           throw new Error("it is wrong");
         }
         const data = await response.json();
-        setPostContent(data);
+        setPostContents(data);
       } catch (err) {
         console.log(err.message);
       }
@@ -27,11 +32,24 @@ const MainPage = () => {
     fetchData();
   }, []);
 
+  // useEffect( () => {
+  //   async function fetchData(){
+  //     if( postContents.length === -1){
+        
+  //       setPostContents( await getData() )
+  //       console.log(postContents);
+  //     }else{
+  //       return false;
+  //     }
+  //   }
+  //   console.log(fetchData());
+  //   fetchData();
+  // },[]);
+
   const showMore = () => {
     console.log("it clicked");
     setShow(!show);
-    setHide (false)
-
+    setHide(false);
   };
 
   // const closeOptions = () => {
@@ -39,35 +57,58 @@ const MainPage = () => {
   //   setShow(false);
   //   setHide(!hide)
 
+  const clickShowTextArea = () => {
+
+    setShowTextArea(false);
+    setHideText(!hideText);
+  }
   // }
-
-
+  const handleEdit = () => {
+    setIsActived(!isActived);
+  }
+  // const handleUPdate = async() => {
+  //   const isUPdated =  UpdateItem(item._id)
+  //   const comboItems = [...postContents , ...isUPdated]
+  //   console.log(comboItems);
+  //   if(comboItems){
+  //     return true;
+  //   }else{
+  //     console.log("updating item failed");
+  //   }
+  // }
+  const setAb = (e) => {
+    setAbc(e.target.value)
+  }
   return (
-    <main >
-     
+    <main>
       <article className="main-page-Container">
-      
         {/* <section className="m-post-container"> */}
 
         {/* <div>
               <img className="m-p-profile" src={profile} alt="profile" />{" "}
               <p>name</p>
             </div> */}
-        {postContent.map((item, i) => (
-          <ul className="m-post-container" key={i}>
+        {postContents && postContents.map((item) => (
+          <ul className="m-post-container" key={item._id}>
             <section onClick={showMore} className="m-p-more">
               ...
-              <div  style={{display: !show? "none" : ""}}>
+              <div style={{ display: !show ? "none" : "" }}>
                 {" "}
-                <span className="feature"> edit </span>
-                <span onClick={() => ClearItem(item._id)} className="feature">delete</span>{" "}
+                <span  onClick={ clickShowTextArea} className="feature">  edit  </span>
+                <span onClick={() => ClearItem(item._id)} className="feature">
+                  delete
+                </span>{" "}
               </div>
             </section>
             <li className="m-p-top">
               <img className="m-p-image" src={item.image} alt="" />
-              <p className="m-p-text">{item.context}</p>
+                 {!showTextArea? <textarea className="m-p-text" name="" id="" cols="75" rows="10">{item.context}</textarea>
+                 :  <p className="m-p-text">{item.context}</p>}
+              
+              { !showTextArea? <button onClick={() => UpdateItem(item._id )} >click</button> : "" }
               <p className="m-p-date">{item.createdAt}</p>
             </li>
+           
           </ul>
         ))}
 

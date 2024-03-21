@@ -4,9 +4,10 @@ export const ConfiContext = createContext();
 
 const ContextRoot = ({children}) => {
     const [isLogin , setIsLogin] = useState(false)
+    const [isContent , setIsContent] = useState ([])
     const [postContents , setPostContents] = useState([])
     return(
-        <ConfiContext.Provider value={{isLogin,setIsLogin, postContents,setPostContents}}>
+        <ConfiContext.Provider value={{isLogin,setIsLogin, postContents,setPostContents,isContent,setIsContent}}>
             {children}
         </ConfiContext.Provider>
     )
