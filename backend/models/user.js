@@ -11,9 +11,10 @@ const TheUsers = mongoose.Schema(
             type: String,
             required: true,
         },
-        profile:{
+        email:{
             type: String,
-            required: false,
+            required: true,
+            unique: true,
         }
     }
 )

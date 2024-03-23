@@ -1,13 +1,13 @@
 
 
-const updateContent = async (objectId , content ,picture) => {
+const updateContent = async (objectId , content ) => {
 
     const url = "/api/content/edit/" + objectId ;
     console.log("updateContent1",objectId);
 
     const data = {
         context: content,
-        image: picture
+   
     }
     console.log("updateContent2",data);
 
@@ -16,7 +16,7 @@ const updateContent = async (objectId , content ,picture) => {
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify()
+        body: JSON.stringify(data)
     }
     const response = await fetch(url, options)
     const statusObject = await response.json()

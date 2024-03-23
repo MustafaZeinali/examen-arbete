@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import MainPage from "../components/routes/MainPage";
 import Root from "./Root";
 import UpdateItem from "../components/content/UpdateContent";
+import Login from "../components/Login";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: "/edit",
                 element: <UpdateItem/>
+            },
+            {
+                path:"/sign",
+                element: <Login/>
             }
         ]
     }

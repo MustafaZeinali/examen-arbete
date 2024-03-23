@@ -1,6 +1,7 @@
 import { User } from "../models/user.js";
 import express from "express";
 import bcrypt from "bcrypt";
+import nodemailer from "nodemailer"
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -17,20 +18,57 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+
+  const {email} = req.body;
+  // const theEmail = {email}
+
+  console.log("credentiala" , process.env.EMAIL_USER , process.env.EMAIL_PASSWORD);
+ 
+  
   const salting = await bcrypt.genSalt(10);
   // validera input här
   const palintextPass = req.body.password;
-  console.log("register", palintextPass , salting);
+  //console.log("register", palintextPass , salting);
   const hashpass = await bcrypt.hash(palintextPass, salting);
-  console.log("register 2 ");
+
+  // async function getIt (){
+  //   let transporter = nodemailer.createTransport({
+  //     service: "Gmail",
+  //     host: "iamtester1221@gmail.com",
+  //     port: 465,
+  //     secure: true,
+  //     auth: {
+  //       user: process.env.EMAIL_USER,
+  //       pass: process.env.EMAIL_PASSWORD
+  //     },
+  //   })
+
+  //  const url = "http://localhost:5173"
+
+  //   const info = await transporter.sendMail({
+  //     from: process.env.EMAIL_USER,
+  //     to: email,
+  //     subject: "Bekräfta konto",
+  //     text: "hello world",
+  //     html: `Click <a href= "${url}" > här </a> för att bekräfta ditt mejl`
+  //   })
+  //   console.log("message", info.messageId);
+  // }
+
+ 
   try {
     const newUser = new User({
       username: req.body.username,
       password: hashpass,
+      email: email
     });
-    const createUser = await newUser.save();
-    if (createUser) {
-      res.json({ message: "user is created", data: createUser });
+    
+  const createUser = await newUser.save();
+
+ 
+    if (createUser ) {
+      
+      res.status(201).send({ message: `skickat a bekräftelse mejl to ${email}`, data: createUser });
     } else {
       res.status(404).json({ error: "it is wrong with backend post router" });
     }

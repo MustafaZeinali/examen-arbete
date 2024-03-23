@@ -40,24 +40,36 @@
 }
 .m-p-image{
     align-self: center;
+    margin-top: 1em;
+    width: 25em;
+    height: 22em;
 }
 .m-p-date{
     
     /* border: solid 1px rgb(86, 86, 204); */
     color: rgb(146, 146, 146);
     position: relative;
-    left: -2.8em;
+   
     bottom: -2em;
+    align-self: flex-start;
 }
 .m-p-more {
     font-size: 2em;
     align-self: flex-start;
-    margin-top: .1em;
-    margin-left: .1em;
+    margin-top: -1em;
+    margin-left: .5em;
     cursor: pointer;
 }
-.m-p-more > div {
+.m-p-more > * {
     display: flex;
     flex-direction: column;
-    /* border: solid 1px rgb(32, 204, 127); */
+    position: relative;
+    
+    
+    border: solid 1px rgb(32, 204, 127);
+}
+.m-p-more > span {
+    position: fixed;
+    z-index: 100;
+    
 }
