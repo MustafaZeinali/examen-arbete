@@ -73,3 +73,7 @@
     z-index: 100;
     
 }
+.m-ptextarea {
+    width: 20em;
+    height: 10em;
+}

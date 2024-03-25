@@ -1,7 +1,7 @@
 import { IoSearchOutline } from "react-icons/io5";
 import "../../style/header.css"
 import { MdOutlineLogin } from "react-icons/md";
-import Login from "../Login";
+import Login from "../login/Login";
 import { useState , useContext } from "react";
 // import { ConfiContext } from "../../routeConfi/ContextConfi";
 

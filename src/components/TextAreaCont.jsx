@@ -1,32 +1,30 @@
 import { useContext, useEffect, useState } from "react"
 import "../style/mainPage.css";
-import UpdateItem from "./content/UpdateContent";
-import { ConfiContext } from "../routeConfi/ContextConfi";
 
-const MyTextarea = (props) => {
-    const [itextarea, setItextarea] = useState(props.text)
-    const {content} = useContext(ConfiContext)
-    // useEffect(() => {
-    //     const fetchData = async () =>{
-    //         const response = await fetchData("/api/content")
-    //         if(response){
-    //             return true
-    //         }else {
-    //             console.log("det är fel");
-    //         }
-    //     }
-    // })
+
+const MyTextarea = ({getContent,_id, setGetContent}) => {
+   console.log("2", getContent);
+    const style = {
+        width: "60em",
+        height: "10em",
+    }
     
 
-
-    const handleTextareaChange = event => setItextarea(event.target.value)
-
-    return(
+    const handleTextareaChange = event => setGetContent(getContent.map(c => {
+        if(c._id === _id) {
+            return {...c, context: event.target.value}
+        }
+        return c
+    })
+    )
+    
+    return( 
         <>
-         <textarea cols="200" rows="10"
-        value={itextarea}
+         <textarea cols="150" rows="10"
+        value={getContent.filter(c => c._id === _id).map(c => {return c.context})}
         onChange={handleTextareaChange}
-        className="m-p-text"
+        className="m-p-textarea"
+        style={style}
         />
         
         </>

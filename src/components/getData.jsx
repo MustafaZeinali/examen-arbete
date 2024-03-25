@@ -1,3 +1,4 @@
+
 import { useEffect, useState , useContext } from "react";
 import "../style/mainPage.css";
 import ClearItem from "./content/DeleteContent.jsx";
@@ -5,13 +6,13 @@ import MyTextarea from "./TextAreaCont";
 import { ConfiContext } from "../routeConfi/ContextConfi";
 import UpdateItem from "./content/UpdateContent";
 
-
-const FetchData = () => {
-  const {content, setContent} = useContext(ConfiContext);
+const FetchData = ( ) => {
+  const {content} = useContext(ConfiContext);
   const [showMore, setShowMore] = useState(false);
-  const [hideMore, setHideMore] = useState(false);
+  const [hideMore, setHideMore] = useState(true);
   const [showTextArea , setShowTextArea] = useState(true)
   const [hideText , setHideText] = useState(false)
+  const [getContent , setGetContent] = useState([]);
 
   const showMoreInfo = () => {
     console.log("it clicked");
@@ -25,7 +26,19 @@ const FetchData = () => {
     setHideText(!hideText);
   }
 
- 
+    useEffect(() => {
+      if (content.length !== 0) {
+        setGetContent(content);
+      }
+    }, [content]);
+
+  if (content.length === 0) {
+    return (
+      <div>
+        <h1>Loading</h1>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -34,7 +47,7 @@ const FetchData = () => {
           <div className="m-post-container" key={item._id}>
             <div className="m-p-more">
               <p onClick={showMoreInfo}>...</p>
-              <div style={{ display: !showMore ? "none" : "" }}>
+              <div style={{display: showMore ? "none" : ""} } >
                 <span onClick={clickShowTextArea} > redigera </span>
                 <span onClick={ () => ClearItem(item._id)} > ta bort </span> 
               </div>
@@ -42,14 +55,18 @@ const FetchData = () => {
             <div className="m-p-top">
               <img className="m-p-image" src={item.image} />
             </div>
-
-            {!showTextArea ? <MyTextarea text={item.context}/> :<p className="m-p-text" >{item.context}</p>} 
-            {!showTextArea ? <button onClick={() =>UpdateItem(item._id)} >Spara</button> : ""}
+            
+            {!showTextArea ? <MyTextarea className="m-p-textarea" {...{getContent,_id: item._id, setGetContent}}/> :<p className="m-p-text" >{item.context}</p>} 
+            {/* {!showTextArea ? < itemId={item._id} theContent={item.context}/> :null } */}
+            {!showTextArea ? <button onClick={() => UpdateItem({getContent,itemId: item._id})} >Spara</button> : ""}
             <p className="m-p-date"> {item.createdAt} </p>
           </div>
+          
         ))}
+        
       </article>
     </>
   );
 };
 export default FetchData;
+

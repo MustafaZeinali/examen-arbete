@@ -1,7 +1,7 @@
-import "../style/login.css";
+import "../../style/login.css";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import registerUser from "../api/user/registerUser";
+import registerUser from "../../api/user/registerUser";
 
 const Login = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);

@@ -1,20 +1,19 @@
 
+const updateContent = async (itemId , theContent ) => {
 
-const updateContent = async (objectId , content ) => {
-
-    const url = "/api/content/edit/" + objectId ;
-    console.log("updateContent1",objectId);
+    const url = "/api/content/edit/" + itemId ;
+    console.log("itemId22",itemId);
+    console.log("theContent223",theContent);
 
     const data = {
-        context: content,
-   
+        context: theContent.context, 
     }
-    console.log("updateContent2",data);
+    console.log("updateContent2",data); 
 
     const options = {
-        method : "PUT",
+        method : "PUT", 
         headers: {
-            "Content-type": "application/json"
+            "Content-type": "application/json" 
         },
         body: JSON.stringify(data)
     }

@@ -1,6 +1,6 @@
 import express from 'express';
 import { Content } from '../models/content.js';
-
+import {mongoose} from 'mongoose';
 const router = express.Router();
 
 
@@ -51,29 +51,41 @@ router.post('/' , async(req, res ) => {
     }
 })
 
+
 router.put("/edit/:id", async(req, res) => {
-    console.log("/edit/:id");
+    console.log("/edit/:id 22222");
+    let result;
     try{
         const {id} = req.params
+        // id = mongoose.Types.ObjectId(id);
+
         // const {id} = req.params.id;
          const updatecontentData = req.body
-        const prevContent = await Content.findByIdAndUpdate(id , updatecontentData);
-        if(!prevContent){
+         console.log("updatecontentData111", updatecontentData);
+         console.log("updatecontentData222", typeof(updatecontentData));
+         result = await Content.findById(id).then((c) => {
+            console.log("c", c);
+            c.context = updatecontentData.context;
+            return c.save();
+        });
+        if(!result){
             return res.status(404).json({message: `cannot find product by id ${id}`})
         }
         // Object.assign(prevContent, updatecontentData)
         // if(updatecontentData){
         //     prevContent = updatecontentData.map(item => ({...item}))
         // }
-        const updateContent = await Content.findById(id)
-        res.json(updateContent)
+        // const updateContent = await Content.findById(id)
+        // res.json(updateContent)
         //res.json(getProduct) to show what is changed 
 
     }
     catch(error){
         res.status(500).json({ message: error.message})
     }
+    return res.json({message: result})
 })
+
 
 router.delete("/delete/:id", async(req, res) => {
     console.log("/delete/:id");

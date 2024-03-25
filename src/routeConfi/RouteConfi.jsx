@@ -2,8 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 
 import MainPage from "../components/routes/MainPage";
 import Root from "./Root";
-import UpdateItem from "../components/content/UpdateContent";
-import Login from "../components/Login";
+import UpdateItem from "../components/content/UpdateContent.jsx";
+import Login from "../components/login/Login";
+import SendContents from "../components/content/PostContent";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,13 @@ const router = createBrowserRouter([
             {
                 path:"/sign",
                 element: <Login/>
+            },
+            {path: "/update",
+             element: <UpdateItem/>
+            },
+            {
+                path: "/post",
+                element: <SendContents/>
             }
         ]
     }
