@@ -24,3 +24,9 @@
     width: 17em;
     height: 2.3em;
 }
+.log-close-icon-post-Content{
+    font-size: 2em;
+    align-self: flex-end;
+    margin-bottom: .1em;
+    margin-top: -.7em;
+}

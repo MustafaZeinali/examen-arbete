@@ -1,7 +1,9 @@
 import { useState } from "react";
 import SendData from "../../api/content/postContent.js";
 import "../../style/postContents.css";
-
+import { IoClose } from "react-icons/io5";
+import { NavLink , useNavigate} from "react-router-dom";
+  
 const SendContents = () => {
   const [context, setContext] = useState({
     text: "",
@@ -22,8 +24,13 @@ const SendContents = () => {
     } else {
       console.log("Failed to send");
     }
-  };
 
+  };
+  const navigate = useNavigate()
+  const handleNavigae = () => {
+    navigate("/");
+  }
+  // const navigate = useNavigate();
 //   function handleData(item){
 //     setContext({...context, item: e.target. })
 //   }
@@ -43,9 +50,12 @@ const SendContents = () => {
   return (
     <main>
       <div className="ipost-container">
+      <p  className="log-close-icon-post-Content"   ><IoClose onClick={handleNavigae}/></p>
+
         <section className="itext" >
           <label htmlFor="itext"> </label>
           <textarea onChange={handleContextText} name="itext" id="itext" cols="30" rows="10"
+          placeholder="vad tänker du på att skriva?"
           value={context.text}/>
         </section>
         {/* <section>

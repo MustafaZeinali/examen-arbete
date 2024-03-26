@@ -25,7 +25,7 @@ const MainPage = () => {
   return (
     <>
       <div >
-          {isLogined ? <p>inloggad</p> : null}
+         
          <div className="add-content">
          {!isLogined ? <span className="add-content-icon" onClick={handleAddItem}> <FaRegPlusSquare style={{display: !showAddItem ? "" : "none"}}/>  </span>: ""}
          {!hideAddItem ? <SendContents/> : ""} 

@@ -5,7 +5,7 @@ export const ConfiContext = createContext();
 const ContextRoot = ({children}) => {
     const [content , setContent] = useState ([])
     const [postContents , setPostContents] = useState([])
-    const [islogined , setIsLogined] = useState(false)
+    const [isLogined , setIsLogined] = useState(false)
 
     useEffect(() => {
         const fetchDataFromApi = async () => {
@@ -25,7 +25,7 @@ const ContextRoot = ({children}) => {
         const jwt = sessionStorage.getItem("jwt");
         console.log("jwt is working");
         if(jwt) {
-          setIsLogined(!islogined);
+          setIsLogined(!isLogined);
         }else{
           console.log("error getting jwt");
         }
@@ -33,7 +33,7 @@ const ContextRoot = ({children}) => {
 
     
     return(
-        <ConfiContext.Provider value={{ postContents,setPostContents,content,setContent,islogined,setIsLogined}}>
+        <ConfiContext.Provider value={{ postContents,setPostContents,content,setContent,isLogined,setIsLogined}}>
             {children}
         </ConfiContext.Provider>
     )

@@ -5,7 +5,7 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   border: solid 1px red;
+   /* border: solid 1px red; */
     
     
 
@@ -21,7 +21,7 @@
     border-radius: 12px;
     box-shadow:2px 2px 10px 4px rgba(0,0,0,0.1);
     position: relative;
-    border: solid 1px rgb(47, 101, 194);
+    /* border: solid 1px rgb(47, 101, 194); */
 }
 .m-p-top{
     display: flex;
@@ -43,6 +43,7 @@
     margin-top: 1em;
     width: 25em;
     height: 22em;
+    border-radius: 9px;
 }
 .m-p-date{
     
@@ -54,7 +55,7 @@
     align-self: flex-start;
 }
 .m-p-more {
-    font-size: 2em;
+    font-size: 1.4em;
     align-self: flex-start;
     margin-top: -1em;
     margin-left: .5em;
@@ -66,11 +67,15 @@
     position: relative;
     
     
-    border: solid 1px rgb(32, 204, 127);
+    
+    /* border: solid 1px rgb(32, 204, 127); */
 }
 .m-p-more > span {
     position: fixed;
     z-index: 100;
+    background-color: #fbfbfb;
+    margin: .1;
+    border: solid 1px red;
     
 }
 .m-ptextarea {
