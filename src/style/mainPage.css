@@ -77,3 +77,13 @@
     width: 20em;
     height: 10em;
 }
+.add-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-content-icon{
+    font-size: 2.2em;
+    margin-top: .3em;
+    
+}

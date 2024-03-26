@@ -1,11 +1,11 @@
-import { createContext, useRef, useState , useEffect} from "react";
+import { createContext, useState , useEffect} from "react";
 
 export const ConfiContext = createContext();
 
 const ContextRoot = ({children}) => {
-    const [isLogin , setIsLogin] = useState(false)
     const [content , setContent] = useState ([])
     const [postContents , setPostContents] = useState([])
+    const [islogined , setIsLogined] = useState(false)
 
     useEffect(() => {
         const fetchDataFromApi = async () => {
@@ -21,16 +21,19 @@ const ContextRoot = ({children}) => {
         fetchDataFromApi();
       }, []);
 
-    const loginRef = useRef();
-    const statusLogin = (state) => {
-        if(state){
-            loginRef.current.show()
-        }else {
-            loginRef.current.close()
+      useEffect(() => {
+        const jwt = sessionStorage.getItem("jwt");
+        console.log("jwt is working");
+        if(jwt) {
+          setIsLogined(!islogined);
+        }else{
+          console.log("error getting jwt");
         }
-    };
+      },[]);
+
+    
     return(
-        <ConfiContext.Provider value={{isLogin,setIsLogin, postContents,setPostContents,content,setContent,statusLogin}}>
+        <ConfiContext.Provider value={{ postContents,setPostContents,content,setContent,islogined,setIsLogined}}>
             {children}
         </ConfiContext.Provider>
     )

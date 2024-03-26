@@ -22,4 +22,9 @@
 .h-login-icon{
     margin-right: 1em;
     display: flex;
+    text-decoration: none;
+}
+.window-shopper{
+    text-decoration: none;
+    cursor: pointer;
 }

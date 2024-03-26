@@ -56,7 +56,7 @@ const SendContents = () => {
           <input onChange={handleContextImage} className="i-send-image" type="text" name="" value={context.image} placeholder="http://"/>
         </section>
         <section>
-          <button onClick={HandleAddContent} className="itext-btn" >click</button>
+          <button onClick={HandleAddContent} className="itext-btn" >Lägg till</button>
         </section>
       </div>
     </main>

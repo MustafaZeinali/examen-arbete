@@ -1,9 +1,11 @@
 import { User } from "../models/user.js";
 import express from "express";
 import bcrypt from "bcrypt";
-import nodemailer from "nodemailer"
+// import nodemailer from "nodemailer"
+import  jwt  from "jsonwebtoken";
 const router = express.Router();
-
+const secret = "banana"
+console.log("secret" ,secret);
 router.get("/", async (req, res) => {
   try {
     const fetchData = await User.find({});
@@ -22,7 +24,7 @@ router.post("/register", async (req, res) => {
   const {email} = req.body;
   // const theEmail = {email}
 
-  console.log("credentiala" , process.env.EMAIL_USER , process.env.EMAIL_PASSWORD);
+  //console.log("credentiala" , process.env.EMAIL_USER , process.env.EMAIL_PASSWORD);
  
   
   const salting = await bcrypt.genSalt(10);
@@ -87,9 +89,15 @@ router.post("/login", async (req, res) => {
       return;
     }
     const UserPassValidate = await bcrypt.compare(reqPass, userLogin.password);
+    
     if (UserPassValidate) {
-      console.log("fron login", UserPassValidate);
-      res.json({ message: "Login successful" });
+      // console.log("fron login", UserPassValidate);
+      const theTime = 3600 * 2;
+    const payLoad = {userId : userLogin._id}
+    let token = jwt.sign(payLoad , secret,{expiresIn: theTime});
+    console.log("token" + token);
+      res.json({ status:"success",message: "Login successful" , id: userLogin._id , token: token});
+      
       return;
     } else {
       console.log(UserPassValidate);

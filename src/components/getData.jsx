@@ -14,10 +14,13 @@ const FetchData = ( ) => {
   const [hideText , setHideText] = useState(false)
   const [getContent , setGetContent] = useState([]);
 
-  const showMoreInfo = () => {
-    console.log("it clicked");
-    setShowMore(!showMore);
-    setHideMore(!hideMore);
+
+  const showMoreInfo = (itemId) => {
+
+    setShowMore(prevState => ({
+      ...prevState,
+      [itemId]: !prevState[itemId]
+    }));
   };
 
   const clickShowTextArea = () => {
@@ -46,8 +49,8 @@ const FetchData = ( ) => {
         {content.map((item) => (
           <div className="m-post-container" key={item._id}>
             <div className="m-p-more">
-              <p onClick={showMoreInfo}>...</p>
-              <div style={{display: showMore ? "none" : ""} } >
+              <p onClick={() =>showMoreInfo(item._id)}>...</p>
+              <div style={{display: showMore[item._id] ? "" : "none"} } >
                 <span onClick={clickShowTextArea} > redigera </span>
                 <span onClick={ () => ClearItem(item._id)} > ta bort </span> 
               </div>
